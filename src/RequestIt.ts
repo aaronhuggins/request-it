@@ -27,7 +27,7 @@ export class RequestIt {
   cookieJar: RequestItCookieJar
   maxRedirects: number
 
-  private isNullOrUndefined (value: any): boolean {
+  private isNullOrUndefined (value: any): value is (null | undefined) {
     return typeof value === 'undefined' || value === null
   }
 
@@ -102,7 +102,7 @@ export class RequestIt {
       return Buffer.from('', 'utf8')
     }
 
-    return Buffer.from(body)
+    return Buffer.from(body as unknown as any)
   }
 
   private prepareOptions (
