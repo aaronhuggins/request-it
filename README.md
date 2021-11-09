@@ -18,59 +18,503 @@ const { RequestIt } = require('request-it-client')
 
 ## API
 
-### `class RequestIt`
 
-- `new RequestIt(options?: RequestOptions)`
-- **Instance Members**
-  - `public options: RequestOptions`
-  - `public cookieJar: RequestItCookieJar`
-  - `public go(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `public get(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `public patch(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `public post(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `public put(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `public delete(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-- **Static Members**
-  - `static go(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `static get(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `static patch(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `static post(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `static put(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
-  - `static delete(options?: RequestOptions | string | URL): Promise<IncomingMessage>`
+<a name="classesrequestitmd"></a>
 
-### `interface RequestOptions`
+### Class: RequestIt
 
-See NodeJS docs for [details](https://nodejs.org/docs/latest-v12.x/api/http.html#http_http_request_options_callback).
+Node.js library for Promise-based, asynchronous http/s requests.
 
-- **Extended Properties**
-  - `url: string | URL`
-  - `cookieJar?: RequestItCookieJar | CookieJar`; Support for Tough Cookie cookie jars.
-  - `body?: string | Buffer | object | any[]`; Raw data to send, an object or array will be JSONified.
-  - `json?: object | any[]`; Support for JSON data.
-  - `form?: { [key: string]: string | boolean | number }` Support for forms data.
-  - `responseType?: 'json'`; Any response will attempt to be parsed regardless of content-type.
-  - `rejectBadJson?: boolean`; Setting to `true` will throw an error on unparsable JSON.
-  - `followRedirect?: boolean`; Set to `true` by default, controls whther or not to follow redirects.
-  - `maxRedirects?: number`; Maximum number of redirects to follow with a hard limit of 20, defaults to 3.
-  - `params?: { [key: string]: string | boolean | number }`; URL parameters to pass.
+#### Constructors
 
-### `interface IncomingMessage`
+##### constructor
 
-See NodeJS docs for [details](https://nodejs.org/docs/latest-v12.x/api/http.html#http_class_http_incomingmessage).
+• **new RequestIt**(`options?`)
 
-- **Extended Properties**
-  - `json: () => any`
-  - `body: any`
-  - `cookieJar: RequestItCookieJar`
-  - `rawResponse: Buffer`
-  - `rawBody: Buffer`
+###### Parameters
 
-### `class RequestItCookieJar extends CookieJar`
+| Name | Type |
+| :------ | :------ |
+| `options` | [`RequestOptions`](#interfacesrequestoptionsmd) |
 
-Extends `tough-cookie` [cookie jar class](https://github.com/salesforce/tough-cookie#cookiejar).
+#### Properties
 
-- `new RequestItCookieJar(store?: Store, options?: CookieJar.Options)`
-- **Instance Members**
-  - `public findCookie(domain: string, path: string, key: string): Promise<Cookie>`
-- **Static Members**
-  - `static fromCookieJar(cookieJar: CookieJar): RequestItCookieJar`
+##### cookieJar
+
+• **cookieJar**: [`RequestItCookieJar`](#classesrequestitcookiejarmd)
+
+___
+
+##### maxRedirects
+
+• **maxRedirects**: `number`
+
+___
+
+##### options
+
+• **options**: [`RequestOptions`](#interfacesrequestoptionsmd)
+
+#### Methods
+
+##### delete
+
+▸ **delete**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### get
+
+▸ **get**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### go
+
+▸ **go**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+Base method for making a request.
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options?` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+The IncomingMessage object with parsed body and RawBody.
+
+___
+
+##### patch
+
+▸ **patch**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### post
+
+▸ **post**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### put
+
+▸ **put**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### delete
+
+▸ `Static` **delete**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### get
+
+▸ `Static` **get**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### go
+
+▸ `Static` **go**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### patch
+
+▸ `Static` **patch**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### post
+
+▸ `Static` **post**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+___
+
+##### put
+
+▸ `Static` **put**(`options?`): `Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+
+###### Returns
+
+`Promise`<[`IncomingMessage`](#interfacesincomingmessagemd)\>
+
+
+<a name="classesrequestitcookiejarmd"></a>
+
+### Class: RequestItCookieJar
+
+#### Hierarchy
+
+- `CookieJar`
+
+  ↳ **`RequestItCookieJar`**
+
+#### Constructors
+
+##### constructor
+
+• **new RequestItCookieJar**(`store?`, `options?`)
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `store?` | `Store` |
+| `options?` | `Options` |
+
+###### Inherited from
+
+CookieJar.constructor
+
+#### Properties
+
+##### store
+
+• **store**: [`RequestItStore`](#interfacesrequestitstoremd)
+
+#### Methods
+
+##### findCookie
+
+▸ **findCookie**(`domain`, `path`, `key`): `Promise`<`Cookie`\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `domain` | `string` |
+| `path` | `string` |
+| `key` | `string` |
+
+###### Returns
+
+`Promise`<`Cookie`\>
+
+___
+
+##### getCookieString
+
+▸ **getCookieString**(`currentUrl`, `options?`): `Promise`<`string`\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `currentUrl` | `string` |
+| `options?` | `Function` \| `GetCookiesOptions` |
+
+###### Returns
+
+`Promise`<`string`\>
+
+###### Overrides
+
+CookieJar.getCookieString
+
+___
+
+##### setCookie
+
+▸ **setCookie**(`cookieOrString`, `currentUrl`, `options?`): `Promise`<`Cookie`\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cookieOrString` | `string` \| `Cookie` |
+| `currentUrl` | `string` |
+| `options?` | `Function` \| `SetCookieOptions` |
+
+###### Returns
+
+`Promise`<`Cookie`\>
+
+###### Overrides
+
+CookieJar.setCookie
+
+___
+
+##### fromCookieJar
+
+▸ `Static` **fromCookieJar**(`cookieJar`): [`RequestItCookieJar`](#classesrequestitcookiejarmd)
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `cookieJar` | `CookieJar` |
+
+###### Returns
+
+[`RequestItCookieJar`](#classesrequestitcookiejarmd)
+
+
+<a name="interfacesincomingmessagemd"></a>
+
+### Interface: IncomingMessage
+
+#### Hierarchy
+
+- `IncomingMessage`
+
+  ↳ **`IncomingMessage`**
+
+#### Properties
+
+##### body
+
+• **body**: `any`
+
+___
+
+##### cookieJar
+
+• **cookieJar**: [`RequestItCookieJar`](#classesrequestitcookiejarmd)
+
+___
+
+##### rawBody
+
+• **rawBody**: `Buffer`
+
+___
+
+##### rawResponse
+
+• **rawResponse**: `Buffer`
+
+#### Methods
+
+##### json
+
+▸ **json**(): `any`
+
+###### Returns
+
+`any`
+
+
+<a name="interfacesrequestitstoremd"></a>
+
+### Interface: RequestItStore
+
+#### Hierarchy
+
+- `Store`
+
+  ↳ **`RequestItStore`**
+
+#### Methods
+
+##### findCookie
+
+▸ **findCookie**(`domain`, `path`, `key`): `Promise`<`Cookie`\>
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `domain` | `string` |
+| `path` | `string` |
+| `key` | `string` |
+
+###### Returns
+
+`Promise`<`Cookie`\>
+
+###### Overrides
+
+Store.findCookie
+
+
+<a name="interfacesrequestoptionsmd"></a>
+
+### Interface: RequestOptions
+
+#### Hierarchy
+
+- `RequestOptions`
+
+  ↳ **`RequestOptions`**
+
+#### Properties
+
+##### body
+
+• `Optional` **body**: `string` \| `object` \| `any`[] \| `Buffer`
+
+___
+
+##### cookieJar
+
+• `Optional` **cookieJar**: [`RequestItCookieJar`](#classesrequestitcookiejarmd) \| `CookieJar`
+
+___
+
+##### followRedirect
+
+• `Optional` **followRedirect**: `boolean`
+
+___
+
+##### form
+
+• `Optional` **form**: `Object`
+
+###### Index signature
+
+▪ [key: `string`]: `string` \| `boolean` \| `number`
+
+___
+
+##### json
+
+• `Optional` **json**: `object` \| `any`[]
+
+___
+
+##### maxRedirects
+
+• `Optional` **maxRedirects**: `number`
+
+___
+
+##### params
+
+• `Optional` **params**: `Object`
+
+###### Index signature
+
+▪ [key: `string`]: `string` \| `boolean` \| `number`
+
+___
+
+##### rejectBadJson
+
+• `Optional` **rejectBadJson**: `boolean`
+
+___
+
+##### responseType
+
+• `Optional` **responseType**: ``"json"``
+
+___
+
+##### url
+
+• `Optional` **url**: `string` \| `URL`

@@ -16,5 +16,20 @@
     "types": ["mocha", "node"]
   },
 
-  "exclude": ["node_modules", "dist", "test", "gulpfile.ts"]
+  "exclude": ["node_modules", "dist", "test", "gulpfile.ts"],
+
+  "typedocOptions": {
+    "entryPoints": ["index.ts"],
+    "exclude": [
+      "node_modules/**"
+    ],
+    "readme": "abstract.md",
+    "entryPointStrategy": "expand",
+    "disableSources": true,
+    "hideGenerator": true,
+    "excludePrivate": true,
+    "hideBreadcrumbs": true,
+    "hideInPageTOC": true,
+    "out": "./docs"
+  }
 }

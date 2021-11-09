@@ -41,3 +41,5 @@ dist/**
 index.js
 index.d.ts
 !typings/**
+docs/**
+docs.*

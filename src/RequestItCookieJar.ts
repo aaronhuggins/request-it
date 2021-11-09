@@ -2,7 +2,7 @@ import { CookieJar, MemoryCookieStore } from 'tough-cookie'
 import { Cookie, Store } from 'tough-cookie'
 import { promisify } from 'util'
 
-interface RequestItStore extends Store {
+export interface RequestItStore extends Store {
   findCookie(domain: string, path: string, key: string): Promise<Cookie | null>
 }
 
