@@ -5,7 +5,10 @@
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
   "files": [
-    "dist"
+    "index.js",
+    "index.d.ts",
+    "src/*.js",
+    "src/*.d.ts"
   ],
   "keywords": [
     "http",
@@ -15,7 +18,7 @@
   ],
   "scripts": {
     "test": "gulp nyc",
-    "prepack": "gulp tsc",
+    "prepack": "gulp prepack",
     "postpack": "gulp clean"
   },
   "author": "Aaron Huggins <aaron.huggins@gmail.com>",
@@ -33,6 +36,7 @@
     "@types/nock": "^11.1.0",
     "@types/node": "^16.11.7",
     "@types/tough-cookie": "^4.0.1",
+    "del-cli": "^4.0.1",
     "gulp": "^4.0.2",
     "gulp-cli": "^2.3.0",
     "gulp-shell": "^0.8.0",
