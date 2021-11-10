@@ -252,16 +252,20 @@ export class RequestIt {
                       )
                       .catch((error: any) => reject(error))
                   }
-                } else if (redirectCount === self.maxRedirects) {
+                } else if (redirectCount !== 0 && redirectCount === self.maxRedirects) {
                   reject(new Error('The number of redirects has exceeded the max of ' + self.maxRedirects.toString()))
                 }
 
                 const rawResponse = Buffer.concat(responseBufs)
                 const rawBody = Buffer.concat(bodyBufs)
-                response.body = rawBody.toString('utf8')
+                const textBody = rawBody.toString('utf8')
+                response.body = textBody
+                response.rawText = textBody
                 response.cookieJar = internalCookieJar
                 response.rawBody = rawBody
                 response.rawResponse = rawResponse
+                response.redirected = redirectCount > 0
+                response.url = internalUrl.toString()
                 response.json = function json () {
                   try {
                     return JSON.parse(rawBody.toString('utf8'))

@@ -21,4 +21,7 @@ export interface IncomingMessage extends http.IncomingMessage {
   cookieJar: RequestItCookieJar
   rawResponse: Buffer
   rawBody: Buffer
+  rawText: string
+  redirected: boolean
+  url: string
 }
