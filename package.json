@@ -53,6 +53,6 @@
     "tough-cookie": "^4.0.0"
   },
   "optionalDependencies": {
-    "web-streams-polyfill": "^3.2.0"
+    "web-streams-polyfill": ">=3.2.0"
   }
 }
