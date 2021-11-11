@@ -1,8 +1,8 @@
 import * as http from 'http'
 import * as https from 'https'
-import { Socket } from 'net'
-import { RequestOptions, IncomingMessage } from './Interfaces'
 import { RequestItCookieJar } from './RequestItCookieJar'
+import type { Socket } from 'net'
+import type { RequestOptions, IncomingMessage } from './Interfaces'
 
 const MAX_REDIRECTS = 3
 const REDIRECT_LIMIT = 20
