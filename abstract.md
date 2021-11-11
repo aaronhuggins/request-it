@@ -20,9 +20,9 @@ const { RequestIt } = require('request-it-client')
 
 ### Fetch API
 
-This library now implements the Web standard Fetch API, in as much it makes sense in server-side Node. There is no support for form data or blobs; cookies have been exposed on the response object.
+This library now implements the Web standard Fetch API, in as much it makes sense in server-side Node. There is no support for `formData` or `blob` methods; cookies have been exposed on the response object; and the request init options are specific to the RequestIt client.
 
-Install this library and the optional dependency for `fetch`.
+Install this library and the web-streams dependency to use `fetch`.
 
 ```shell
 npm install --save request-it-client web-streams-polyfill
