@@ -27,7 +27,6 @@ const { fetch } = require('request-it-client')
 
 ### RequestIt interface
 
-
 ```js
 const { RequestIt } = require('request-it-client')
 

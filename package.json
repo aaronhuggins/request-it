@@ -1,6 +1,6 @@
 {
   "name": "request-it-client",
-  "version": "2.0.0-beta",
+  "version": "2.0.0-beta2",
   "description": "Yet another client library for working with http/s requests.",
   "main": "dist/index.js",
   "types": "dist/index.d.ts",
@@ -50,9 +50,7 @@
     "typescript": "^4.5.4"
   },
   "dependencies": {
-    "tough-cookie": "^4.0.0"
-  },
-  "optionalDependencies": {
+    "tough-cookie": "^4.0.0",
     "web-streams-polyfill": ">=3.2.0"
   }
 }
