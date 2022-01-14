@@ -1,3 +1,6 @@
+export * from './src/fetch'
+export * from './src/RequestItResponse'
+export * from './src/RequestItHeaders'
 export * from './src/RequestIt'
 export * from './src/RequestItCookieJar'
 export * from './src/Interfaces'
