@@ -2,9 +2,31 @@
 
 A stupidly simple HTTP client for Node-JS that should just work. Built-in support for cookies, JSON, and may follow up to a max of 20 redirects.
 
+It is expected to deprecate this module in favor of [Deno's native fetch](https://doc.deno.land/deno/stable/~/fetch) or [node-fetch](https://github.com/node-fetch/node-fetch) by end of year 2022.
+
+If you are using this module in production, we suggest upgrading to v2, gradually moving to the Fetch API, and then replacing this lib with native or node-fetch.
+
+We will accept bug reports and patches through Nov 2022.
+
 ## Usage
 
-Install via [NPM](https://www.npmjs.com/package/request-it-client) and require in your project. Then request it and go!
+Install via [NPM](https://www.npmjs.com/package/request-it-client) and require in your project.
+
+### Fetch API (Recommended migration path)
+
+```js
+const { fetch } = require('request-it-client')
+
+;(async function main () {
+  const res = await fetch('https://reqres.in/api/users/2')
+  const body = await res.json()
+
+  console.log(body.data.first_name) // expected result: Janet
+})()
+```
+
+### RequestIt interface
+
 
 ```js
 const { RequestIt } = require('request-it-client')
@@ -16,8 +38,7 @@ const { RequestIt } = require('request-it-client')
 })()
 ```
 
-## API
-
+## RequestIt API
 
 <a name="classesrequestitmd"></a>
 
@@ -65,7 +86,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -81,7 +102,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -99,7 +120,7 @@ Base method for making a request.
 
 | Name | Type |
 | :------ | :------ |
-| `options?` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options?` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -117,7 +138,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -133,7 +154,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -149,7 +170,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -165,7 +186,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -181,7 +202,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -197,7 +218,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -213,7 +234,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -229,7 +250,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -245,7 +266,7 @@ ___
 
 | Name | Type |
 | :------ | :------ |
-| `options` | `string` \| [`RequestOptions`](#interfacesrequestoptionsmd) \| `URL` |
+| `options` | `string` \| `URL` \| [`RequestOptions`](#interfacesrequestoptionsmd) |
 
 ###### Returns
 
@@ -363,6 +384,361 @@ ___
 [`RequestItCookieJar`](#classesrequestitcookiejarmd)
 
 
+<a name="classesrequestitheadersmd"></a>
+
+### Class: RequestItHeaders
+
+#### Hierarchy
+
+- `Map`<`string`, `string`\>
+
+  ↳ **`RequestItHeaders`**
+
+#### Implements
+
+- `Headers`
+
+#### Constructors
+
+##### constructor
+
+• **new RequestItHeaders**(`init`)
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `init` | `Iterable`<readonly [`string`, `string`]\> \| `Record`<`string`, `string` \| `string`[]\> |
+
+###### Overrides
+
+Map&lt;string, string\&gt;.constructor
+
+#### Properties
+
+##### forEach
+
+• **forEach**: (`callbackfn`: (`value`: `string`, `key`: `string`, `parent`: [`RequestItHeaders`](#classesrequestitheadersmd)) => `void`, `thisArg?`: `any`) => `void`
+
+###### Type declaration
+
+▸ (`callbackfn`, `thisArg?`): `void`
+
+####### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `callbackfn` | (`value`: `string`, `key`: `string`, `parent`: [`RequestItHeaders`](#classesrequestitheadersmd)) => `void` |
+| `thisArg?` | `any` |
+
+####### Returns
+
+`void`
+
+###### Implementation of
+
+Headers.forEach
+
+###### Overrides
+
+Map.forEach
+
+#### Methods
+
+##### append
+
+▸ **append**(`name`, `value`): `void`
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `value` | `string` |
+
+###### Returns
+
+`void`
+
+###### Implementation of
+
+Headers.append
+
+___
+
+##### set
+
+▸ **set**(`name`, `value`): [`RequestItHeaders`](#classesrequestitheadersmd)
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `name` | `string` |
+| `value` | `string` |
+
+###### Returns
+
+[`RequestItHeaders`](#classesrequestitheadersmd)
+
+###### Implementation of
+
+Headers.set
+
+###### Overrides
+
+Map.set
+
+
+<a name="classesrequestitresponsemd"></a>
+
+### Class: RequestItResponse
+
+#### Implements
+
+- `Response`
+
+#### Constructors
+
+##### constructor
+
+• **new RequestItResponse**(`msg`)
+
+###### Parameters
+
+| Name | Type |
+| :------ | :------ |
+| `msg` | [`IncomingMessage`](#interfacesincomingmessagemd) |
+
+#### Accessors
+
+##### body
+
+• `get` **body**(): `ReadableStream`<`Uint8Array`\>
+
+###### Returns
+
+`ReadableStream`<`Uint8Array`\>
+
+###### Implementation of
+
+Response.body
+
+___
+
+##### bodyUsed
+
+• `get` **bodyUsed**(): `boolean`
+
+###### Returns
+
+`boolean`
+
+###### Implementation of
+
+Response.bodyUsed
+
+___
+
+##### cookies
+
+• `get` **cookies**(): [`RequestItCookieJar`](#classesrequestitcookiejarmd)
+
+Because server-side javascript has no global cookie methods.
+
+###### Returns
+
+[`RequestItCookieJar`](#classesrequestitcookiejarmd)
+
+___
+
+##### headers
+
+• `get` **headers**(): [`RequestItHeaders`](#classesrequestitheadersmd)
+
+###### Returns
+
+[`RequestItHeaders`](#classesrequestitheadersmd)
+
+###### Implementation of
+
+Response.headers
+
+___
+
+##### ok
+
+• `get` **ok**(): `boolean`
+
+###### Returns
+
+`boolean`
+
+###### Implementation of
+
+Response.ok
+
+___
+
+##### redirected
+
+• `get` **redirected**(): `boolean`
+
+###### Returns
+
+`boolean`
+
+###### Implementation of
+
+Response.redirected
+
+___
+
+##### status
+
+• `get` **status**(): `number`
+
+###### Returns
+
+`number`
+
+###### Implementation of
+
+Response.status
+
+___
+
+##### statusText
+
+• `get` **statusText**(): `string`
+
+###### Returns
+
+`string`
+
+###### Implementation of
+
+Response.statusText
+
+___
+
+##### type
+
+• `get` **type**(): `ResponseType`
+
+Always basic; server side has no respect for cors.
+
+###### Returns
+
+`ResponseType`
+
+###### Implementation of
+
+Response.type
+
+___
+
+##### url
+
+• `get` **url**(): `string`
+
+###### Returns
+
+`string`
+
+###### Implementation of
+
+Response.url
+
+#### Methods
+
+##### arrayBuffer
+
+▸ **arrayBuffer**(): `Promise`<`ArrayBuffer`\>
+
+###### Returns
+
+`Promise`<`ArrayBuffer`\>
+
+###### Implementation of
+
+Response.arrayBuffer
+
+___
+
+##### blob
+
+▸ **blob**(): `never`
+
+Unsupported method.
+
+###### Returns
+
+`never`
+
+###### Implementation of
+
+Response.blob
+
+___
+
+##### clone
+
+▸ **clone**(): [`RequestItResponse`](#classesrequestitresponsemd)
+
+###### Returns
+
+[`RequestItResponse`](#classesrequestitresponsemd)
+
+###### Implementation of
+
+Response.clone
+
+___
+
+##### formData
+
+▸ **formData**(): `never`
+
+Unsupported method.
+
+###### Returns
+
+`never`
+
+###### Implementation of
+
+Response.formData
+
+___
+
+##### json
+
+▸ **json**(): `Promise`<`any`\>
+
+###### Returns
+
+`Promise`<`any`\>
+
+###### Implementation of
+
+Response.json
+
+___
+
+##### text
+
+▸ **text**(): `Promise`<`string`\>
+
+###### Returns
+
+`Promise`<`string`\>
+
+###### Implementation of
+
+Response.text
+
+
 <a name="interfacesincomingmessagemd"></a>
 
 ### Interface: IncomingMessage
@@ -396,6 +772,28 @@ ___
 ##### rawResponse
 
 • **rawResponse**: `Buffer`
+
+___
+
+##### rawText
+
+• **rawText**: `string`
+
+___
+
+##### redirected
+
+• **redirected**: `boolean`
+
+___
+
+##### url
+
+• **url**: `string`
+
+###### Overrides
+
+http.IncomingMessage.url
 
 #### Methods
 
@@ -473,11 +871,7 @@ ___
 
 ##### form
 
-• `Optional` **form**: `Object`
-
-###### Index signature
-
-▪ [key: `string`]: `string` \| `boolean` \| `number`
+• `Optional` **form**: `URLSearchParams` \| { [key: string]: `string` \| `boolean` \| `number`;  }
 
 ___
 

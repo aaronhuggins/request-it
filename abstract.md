@@ -2,11 +2,30 @@
 
 A stupidly simple HTTP client for Node-JS that should just work. Built-in support for cookies, JSON, and may follow up to a max of 20 redirects.
 
-Now has a `fetch` implementation which will eventually become the standard export in version 3.
+It is expected to deprecate this module in favor of [Deno's native fetch](https://doc.deno.land/deno/stable/~/fetch) or [node-fetch](https://github.com/node-fetch/node-fetch) by end of year 2022.
+
+If you are using this module in production, we suggest upgrading to v2, gradually moving to the Fetch API, and then replacing this lib with native or node-fetch.
+
+We will accept bug reports and patches through Nov 2022.
 
 ## Usage
 
-Install via [NPM](https://www.npmjs.com/package/request-it-client) and require in your project. Then request it and go!
+Install via [NPM](https://www.npmjs.com/package/request-it-client) and require in your project.
+
+### Fetch API (Recommended migration path)
+
+```js
+const { fetch } = require('request-it-client')
+
+;(async function main () {
+  const res = await fetch('https://reqres.in/api/users/2')
+  const body = await res.json()
+
+  console.log(body.data.first_name) // expected result: Janet
+})()
+```
+
+### RequestIt interface
 
 ```js
 const { RequestIt } = require('request-it-client')
@@ -18,28 +37,4 @@ const { RequestIt } = require('request-it-client')
 })()
 ```
 
-### Fetch API
-
-This library now implements the Web standard Fetch API, in as much it makes sense in server-side Node. There is no support for `formData` or `blob` methods; cookies have been exposed on the response object; and the request init options are specific to the RequestIt client.
-
-Install this library and the web-streams dependency to use `fetch`.
-
-```shell
-npm install --save request-it-client web-streams-polyfill
-```
-
-Then start fetching:
-
-```javascript
-import { fetch } from 'request-it-client/src/fetch'
-
-async function main () {
-  const res = await fetch('https://reqres.in/api/users/2')
-  const body = await res.json()
-
-  console.log(res.body.data.first_name) // expected result: Janet
-}
-```
-
-## API
-
+## RequestIt API
