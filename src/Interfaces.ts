@@ -7,7 +7,7 @@ export interface RequestOptions extends http.RequestOptions {
   cookieJar?: RequestItCookieJar | CookieJar
   body?: string | Buffer | object | any[]
   json?: object | any[]
-  form?: { [key: string]: string | boolean | number }
+  form?: { [key: string]: string | boolean | number } | URLSearchParams
   responseType?: 'json'
   rejectBadJson?: boolean
   followRedirect?: boolean

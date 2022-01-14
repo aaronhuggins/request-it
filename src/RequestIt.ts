@@ -84,7 +84,7 @@ export class RequestIt {
   private prepareBody (
     body: string | Buffer | object | any[],
     json: any,
-    form: { [key: string]: string | boolean | number }
+    form: { [key: string]: string | boolean | number } | URLSearchParams
   ): Buffer {
     if (typeof body === 'string') {
       return Buffer.from(body, 'utf8')
@@ -95,6 +95,10 @@ export class RequestIt {
     }
 
     if (!this.isNullOrUndefined(form)) {
+      if (form instanceof URLSearchParams) {
+        return Buffer.from(form.toString(), 'utf8')
+      }
+
       return Buffer.from(new URLSearchParams(form as Record<string, string>).toString(), 'utf8')
     }
 
@@ -252,8 +256,8 @@ export class RequestIt {
                       )
                       .catch((error: any) => reject(error))
                   }
-                } else if (redirectCount !== 0 && redirectCount === self.maxRedirects) {
-                  reject(new Error('The number of redirects has exceeded the max of ' + self.maxRedirects.toString()))
+                } else if ((redirectCount !== 0 && redirectCount === self.maxRedirects) || (followRedirect && self.maxRedirects === 0)) {
+                  reject(new Error('The number of redirects has exceeded the max of ' + self.maxRedirects.toString() + ' for url ' + url.toString()))
                 }
 
                 const rawResponse = Buffer.concat(responseBufs)
