@@ -1,15 +1,3 @@
-function toString (value: any): string {
-  if (value === undefined) return 'undefined'
-  if (value === null) return 'null'
-  if (typeof value?.toString === 'function') return value.toString()
-
-  return Object.prototype.toString.call(value)
-}
-
-function isIterable (value: any): value is Iterable<any> {
-  return typeof value[Symbol.iterator] === 'function'
-}
-
 export class RequestItHeaders extends Map<string, string> implements Headers {
   constructor (init: Iterable<readonly [string, string]> | Record<string, string | string[]>) {
     if (isIterable(init)) {
@@ -47,4 +35,16 @@ export class RequestItHeaders extends Map<string, string> implements Headers {
   }
 
   forEach: (callbackfn: (value: string, key: string, parent: RequestItHeaders) => void, thisArg?: any) => void
+}
+
+function toString (value: any): string {
+  if (value === undefined) return 'undefined'
+  if (value === null) return 'null'
+  if (typeof value?.toString === 'function') return value.toString()
+
+  return Object.prototype.toString.call(value)
+}
+
+function isIterable (value: any): value is Iterable<any> {
+  return typeof value[Symbol.iterator] === 'function'
 }
